@@ -24,12 +24,12 @@ export class ListRenderComponent implements OnInit {
     this.animalDetails = `O ${animal.name} tem ${animal.age} de idade!`;
   }
 
-  removeAnimal(animal: Animal){
-    console.log("Removendo animal!");
-    this.animals = this.listService.remove(this.animals, animal);
+  removeAnimal(animal: Animal) {
+    this.animals = this.animals.filter((a) => animal.name !== a.name);
+    this.listService.remove(animal.id).subscribe();
   }
 
-  getAnimals(){
+  getAnimals(): void {
     this.listService.getAll().subscribe((animals) => (this.animals = animals));
   }
 }
